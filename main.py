@@ -1,25 +1,13 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-BOT_TOKEN="8118827795:AAEfuLy2000N0063iCxIsn8QUAqcjbcLhbE"
+from telegram.ext import CommandHandler
+from snipe import buy_token
 
-# Start command handler
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("👋 Welcome to your multi-bot system!\nUse /help to see options.")
+async def snipe(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        token_address = context.args[0]
+        amount = float(context.args[1])
+        tx = buy_token(token_address, amount)
+        await update.message.reply_text(f"✅ Sniped! TX: https://bscscan.com/tx/{tx}")
+    except Exception as e:
+        await update.message.reply_text(f"❌ Error: {e}")
 
-# Help command handler
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("""
-🤖 Bot Capabilities:
-/snipe <token> <bnb> — Buy a new coin
-/trade — Coming soon
-/support — Talk to support
-""")
-
-# Init app and register handlers
-app = ApplicationBuilder().token(BOT_TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("help", help_command))
-
-# Run the bot
-print("🤖 Bot running...")
-app.run_polling()
+app.add_handler(CommandHandler("snipe", snipe))
