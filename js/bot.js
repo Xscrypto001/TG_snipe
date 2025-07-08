@@ -94,10 +94,23 @@ bot.command('newtokens', async (ctx) => {
 });
 
 // ✅ /balance command
-const Web3 = require('web3');
+//const Web3 = require('web3');
 //const web3 = new Web3(process.env.RPC_URL);
 //const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider(process.env.RPC_URL));
+//const web3 = new Web3(new Web3.providers.HttpProvider(process.env.RPC_URL));
+/*
+const Web3 = require('web3');
+const web3 = new Web3(process.env.RPC_URL);
+*/
+
+
+//const { createWeb3 } = require('web3');
+
+//const web3 = createWeb3(process.env.RPC_URL);
+const Web3 = require('web3');
+const web3 = new Web3.default('https://bsc-dataseed.binance.org/');
+
+
 
 bot.command('balance', async (ctx) => {
   try {
