@@ -7,7 +7,23 @@ dotenv.config();
 //const Web3 = require('web3');
 const web3 = new Web3.default('https://bsc-dataseed.binance.org/');
 
-const routerAbi = [ /* insert PancakeSwap Router ABI here */ ];
+//const routerAbi = [ /* insert PancakeSwap Router ABI here */ ];
+
+const routerAbi = [
+  {
+    name: "swapExactETHForTokens",
+    type: "function",
+    stateMutability: "payable",
+    inputs: [
+      { name: "amountOutMin", type: "uint256" },
+      { name: "path", type: "address[]" },
+      { name: "to", type: "address" },
+      { name: "deadline", type: "uint256" }
+    ],
+    outputs: [{ name: "amounts", type: "uint256[]" }]
+  }
+];
+
 const routerAddress = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
 const router = new web3.eth.Contract(routerAbi, routerAddress);
 
