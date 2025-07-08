@@ -3,7 +3,10 @@ const Web3 = require('web3');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const web3 = new Web3('https://bsc-dataseed.binance.org/');
+//const web3 = new Web3('https://bsc-dataseed.binance.org/');
+//const Web3 = require('web3');
+const web3 = new Web3.default('https://bsc-dataseed.binance.org/');
+
 const routerAbi = [ /* insert PancakeSwap Router ABI here */ ];
 const routerAddress = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
 const router = new web3.eth.Contract(routerAbi, routerAddress);
